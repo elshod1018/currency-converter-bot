@@ -1,0 +1,1 @@
+worker: sh target/bin/Telegram_Bot_Currency_Converter
