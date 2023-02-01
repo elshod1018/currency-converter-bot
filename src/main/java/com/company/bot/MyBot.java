@@ -28,7 +28,7 @@ public class MyBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage()){
+        if (update.hasMessage()) {
             Message message = update.getMessage();
             MainController.handleMessage(message);
         } else if (update.hasCallbackQuery()) {
@@ -40,30 +40,22 @@ public class MyBot extends TelegramLongPollingBot {
     }
 
     public void sendMsg(Object obj) {
-
         try {
             if (obj instanceof SendMessage) {
-                execute((SendMessage)obj);
+                execute((SendMessage) obj);
+            } else if (obj instanceof EditMessageText) {
+                execute((EditMessageText) obj);
+            } else if (obj instanceof DeleteMessage) {
+                execute((DeleteMessage) obj);
+            } else if (obj instanceof SendPhoto) {
+                execute((SendPhoto) obj);
+            } else if (obj instanceof SendDocument) {
+                execute((SendDocument) obj);
+            } else if (obj instanceof ForwardMessage) {
+                execute((ForwardMessage) obj);
+            } else if (obj instanceof EditMessageReplyMarkup) {
+                execute((EditMessageReplyMarkup) obj);
             }
-            else if (obj instanceof EditMessageText ) {
-                execute((EditMessageText)obj);
-            }
-            else if (obj instanceof DeleteMessage ) {
-                execute((DeleteMessage)obj);
-            }
-            else if (obj instanceof SendPhoto ) {
-                execute((SendPhoto)obj);
-            }
-            else if (obj instanceof SendDocument ) {
-                execute((SendDocument)obj);
-            }
-            else if (obj instanceof ForwardMessage ) {
-                execute((ForwardMessage)obj);
-            }
-            else if (obj instanceof EditMessageReplyMarkup ) {
-                execute((EditMessageReplyMarkup)obj);
-            }
-
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
